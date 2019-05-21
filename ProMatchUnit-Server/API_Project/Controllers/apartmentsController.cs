@@ -26,8 +26,7 @@ namespace API_Project.Controllers
         // GET: api/apartments/5
         [ResponseType(typeof(apartments))]
         public IHttpActionResult Getapartments(int id)
-        {
-            int d = 0;
+        { 
             apartments apartments = db.apartments.Find(id);
             if (apartments == null)
             {
