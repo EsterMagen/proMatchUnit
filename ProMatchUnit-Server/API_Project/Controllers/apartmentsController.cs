@@ -28,6 +28,7 @@ namespace API_Project.Controllers
         public IHttpActionResult Getapartments(int id)
         {
             int y = 0;
+            int x = 1;
             apartments apartments = db.apartments.Find(id);
             if (apartments == null)
             {
