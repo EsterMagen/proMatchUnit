@@ -1,0 +1,1218 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="projectDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="apartments">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_renter" Type="int" Nullable="false" />
+          <Property Name="city" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="address" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="floor" Type="int" Nullable="false" />
+          <Property Name="num_rooms" Type="int" Nullable="false" />
+          <Property Name="main_img" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="extra_img1" Type="nvarchar" MaxLength="50" />
+          <Property Name="extra_img2" Type="nvarchar" MaxLength="50" />
+          <Property Name="extra_img3" Type="nvarchar" MaxLength="50" />
+          <Property Name="extra_img4" Type="nvarchar" MaxLength="50" />
+          <Property Name="extra_img5" Type="nvarchar" MaxLength="50" />
+          <Property Name="extra_img6" Type="nvarchar" MaxLength="50" />
+          <Property Name="extra_img7" Type="nvarchar" MaxLength="50" />
+          <Property Name="price" Type="int" Nullable="false" />
+          <Property Name="remarks" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="categories">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="clients">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="password" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="email" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'projectDB.dbo.comments' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="comments">
+          <Key>
+            <PropertyRef Name="id_client" />
+            <PropertyRef Name="id_item" />
+            <PropertyRef Name="comment" />
+          </Key>
+          <Property Name="id_client" Type="int" Nullable="false" />
+          <Property Name="id_item" Type="int" Nullable="false" />
+          <Property Name="comment" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'projectDB.dbo.custom' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="custom">
+          <Key>
+            <PropertyRef Name="id_client" />
+            <PropertyRef Name="id_category" />
+            <PropertyRef Name="city" />
+            <PropertyRef Name="minPrice" />
+            <PropertyRef Name="maxPrice" />
+          </Key>
+          <Property Name="id_client" Type="int" Nullable="false" />
+          <Property Name="id_category" Type="int" Nullable="false" />
+          <Property Name="city" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="minPrice" Type="int" Nullable="false" />
+          <Property Name="maxPrice" Type="int" Nullable="false" />
+          <Property Name="num_rooms" Type="int" />
+          <Property Name="num_people" Type="int" />
+          <Property Name="floor" Type="int" />
+          <Property Name="mr" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'projectDB.dbo.history' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="history">
+          <Key>
+            <PropertyRef Name="id_item" />
+            <PropertyRef Name="id_category" />
+            <PropertyRef Name="id_client" />
+            <PropertyRef Name="status" />
+          </Key>
+          <Property Name="id_item" Type="int" Nullable="false" />
+          <Property Name="id_category" Type="int" Nullable="false" />
+          <Property Name="id_client" Type="int" Nullable="false" />
+          <Property Name="status" Type="bit" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'projectDB.dbo.orders' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="orders">
+          <Key>
+            <PropertyRef Name="id_item" />
+            <PropertyRef Name="id_category" />
+            <PropertyRef Name="id_client" />
+            <PropertyRef Name="date_receive" />
+            <PropertyRef Name="date_delivery" />
+            <PropertyRef Name="reference" />
+          </Key>
+          <Property Name="id_item" Type="int" Nullable="false" />
+          <Property Name="id_category" Type="int" Nullable="false" />
+          <Property Name="id_client" Type="int" Nullable="false" />
+          <Property Name="date_receive" Type="date" Nullable="false" />
+          <Property Name="date_delivery" Type="date" Nullable="false" />
+          <Property Name="reference" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="renter">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="password" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="email" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="account_num" Type="nchar" MaxLength="13" />
+          <Property Name="bank_num" Type="nchar" MaxLength="3" />
+          <Property Name="snif_num" Type="nchar" MaxLength="3" />
+          <Property Name="tel" Type="nchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="tzimers">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_renter" Type="int" Nullable="false" />
+          <Property Name="city" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="address" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="main_img" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="extra_img1" Type="nvarchar" MaxLength="50" />
+          <Property Name="extra_img2" Type="nvarchar" MaxLength="50" />
+          <Property Name="extra_img3" Type="nvarchar" MaxLength="50" />
+          <Property Name="extra_img4" Type="nvarchar" MaxLength="50" />
+          <Property Name="extra_img5" Type="nvarchar" MaxLength="50" />
+          <Property Name="extra_img6" Type="nvarchar" MaxLength="50" />
+          <Property Name="extra_img7" Type="nvarchar" MaxLength="50" />
+          <Property Name="price" Type="int" />
+          <Property Name="remarks" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="units">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_renter" Type="int" Nullable="false" />
+          <Property Name="city" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="address" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="mr" Type="int" Nullable="false" />
+          <Property Name="main_img" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="extra_img1" Type="nvarchar" MaxLength="50" />
+          <Property Name="extra_img2" Type="nvarchar" MaxLength="50" />
+          <Property Name="extra_img3" Type="nvarchar" MaxLength="50" />
+          <Property Name="extra_img4" Type="nvarchar" MaxLength="50" />
+          <Property Name="extra_img5" Type="nvarchar" MaxLength="50" />
+          <Property Name="extra_img6" Type="nvarchar" MaxLength="50" />
+          <Property Name="extra_img7" Type="nvarchar" MaxLength="50" />
+          <Property Name="price" Type="int" Nullable="false" />
+          <Property Name="remarks" Type="nvarchar(max)" />
+        </EntityType>
+        <Association Name="FK_apartments_renter1">
+          <End Role="renter" Type="Self.renter" Multiplicity="1" />
+          <End Role="apartments" Type="Self.apartments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="renter">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="apartments">
+              <PropertyRef Name="id_renter" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_comments_apartments">
+          <End Role="apartments" Type="Self.apartments" Multiplicity="1" />
+          <End Role="comments" Type="Self.comments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="apartments">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="comments">
+              <PropertyRef Name="id_item" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_comments_client">
+          <End Role="clients" Type="Self.clients" Multiplicity="1" />
+          <End Role="comments" Type="Self.comments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="clients">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="comments">
+              <PropertyRef Name="id_client" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_comments_tzimers">
+          <End Role="tzimers" Type="Self.tzimers" Multiplicity="1" />
+          <End Role="comments" Type="Self.comments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tzimers">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="comments">
+              <PropertyRef Name="id_item" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_comments_units">
+          <End Role="units" Type="Self.units" Multiplicity="1" />
+          <End Role="comments" Type="Self.comments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="units">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="comments">
+              <PropertyRef Name="id_item" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_custom_categories">
+          <End Role="categories" Type="Self.categories" Multiplicity="1" />
+          <End Role="custom" Type="Self.custom" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="categories">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="custom">
+              <PropertyRef Name="id_category" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_custom_client">
+          <End Role="clients" Type="Self.clients" Multiplicity="1" />
+          <End Role="custom" Type="Self.custom" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="clients">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="custom">
+              <PropertyRef Name="id_client" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_history_apartments">
+          <End Role="apartments" Type="Self.apartments" Multiplicity="1" />
+          <End Role="history" Type="Self.history" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="apartments">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="history">
+              <PropertyRef Name="id_item" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_history_categories">
+          <End Role="categories" Type="Self.categories" Multiplicity="1" />
+          <End Role="history" Type="Self.history" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="categories">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="history">
+              <PropertyRef Name="id_category" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_history_client">
+          <End Role="clients" Type="Self.clients" Multiplicity="1" />
+          <End Role="history" Type="Self.history" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="clients">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="history">
+              <PropertyRef Name="id_client" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_history_tzimers">
+          <End Role="tzimers" Type="Self.tzimers" Multiplicity="1" />
+          <End Role="history" Type="Self.history" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tzimers">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="history">
+              <PropertyRef Name="id_item" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_history_units">
+          <End Role="units" Type="Self.units" Multiplicity="1" />
+          <End Role="history" Type="Self.history" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="units">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="history">
+              <PropertyRef Name="id_item" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_orders_apartments">
+          <End Role="apartments" Type="Self.apartments" Multiplicity="1" />
+          <End Role="orders" Type="Self.orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="apartments">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="orders">
+              <PropertyRef Name="id_item" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_orders_categories">
+          <End Role="categories" Type="Self.categories" Multiplicity="1" />
+          <End Role="orders" Type="Self.orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="categories">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="orders">
+              <PropertyRef Name="id_category" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_orders_client">
+          <End Role="clients" Type="Self.clients" Multiplicity="1" />
+          <End Role="orders" Type="Self.orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="clients">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="orders">
+              <PropertyRef Name="id_client" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_orders_tzimers">
+          <End Role="tzimers" Type="Self.tzimers" Multiplicity="1" />
+          <End Role="orders" Type="Self.orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tzimers">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="orders">
+              <PropertyRef Name="id_item" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_orders_units">
+          <End Role="units" Type="Self.units" Multiplicity="1" />
+          <End Role="orders" Type="Self.orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="units">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="orders">
+              <PropertyRef Name="id_item" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tzimers_renter">
+          <End Role="renter" Type="Self.renter" Multiplicity="1" />
+          <End Role="tzimers" Type="Self.tzimers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="renter">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tzimers">
+              <PropertyRef Name="id_renter" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_units_renter">
+          <End Role="renter" Type="Self.renter" Multiplicity="1" />
+          <End Role="units" Type="Self.units" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="renter">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="units">
+              <PropertyRef Name="id_renter" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="projectDBModelStoreContainer">
+          <EntitySet Name="apartments" EntityType="Self.apartments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="categories" EntityType="Self.categories" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="clients" EntityType="Self.clients" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="renter" EntityType="Self.renter" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tzimers" EntityType="Self.tzimers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="units" EntityType="Self.units" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="comments" EntityType="Self.comments" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [comments].[id_client] AS [id_client], 
+    [comments].[id_item] AS [id_item], 
+    [comments].[comment] AS [comment]
+    FROM [dbo].[comments] AS [comments]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="custom" EntityType="Self.custom" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [custom].[id_client] AS [id_client], 
+    [custom].[id_category] AS [id_category], 
+    [custom].[city] AS [city], 
+    [custom].[minPrice] AS [minPrice], 
+    [custom].[maxPrice] AS [maxPrice], 
+    [custom].[num_rooms] AS [num_rooms], 
+    [custom].[num_people] AS [num_people], 
+    [custom].[floor] AS [floor], 
+    [custom].[mr] AS [mr]
+    FROM [dbo].[custom] AS [custom]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="history" EntityType="Self.history" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [history].[id_item] AS [id_item], 
+    [history].[id_category] AS [id_category], 
+    [history].[id_client] AS [id_client], 
+    [history].[status] AS [status]
+    FROM [dbo].[history] AS [history]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="orders" EntityType="Self.orders" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [orders].[id_item] AS [id_item], 
+    [orders].[id_category] AS [id_category], 
+    [orders].[id_client] AS [id_client], 
+    [orders].[date_receive] AS [date_receive], 
+    [orders].[date_delivery] AS [date_delivery], 
+    [orders].[reference] AS [reference]
+    FROM [dbo].[orders] AS [orders]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_apartments_renter1" Association="Self.FK_apartments_renter1">
+            <End Role="renter" EntitySet="renter" />
+            <End Role="apartments" EntitySet="apartments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_comments_apartments" Association="Self.FK_comments_apartments">
+            <End Role="apartments" EntitySet="apartments" />
+            <End Role="comments" EntitySet="comments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_comments_client" Association="Self.FK_comments_client">
+            <End Role="clients" EntitySet="clients" />
+            <End Role="comments" EntitySet="comments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_comments_tzimers" Association="Self.FK_comments_tzimers">
+            <End Role="tzimers" EntitySet="tzimers" />
+            <End Role="comments" EntitySet="comments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_comments_units" Association="Self.FK_comments_units">
+            <End Role="units" EntitySet="units" />
+            <End Role="comments" EntitySet="comments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_custom_categories" Association="Self.FK_custom_categories">
+            <End Role="categories" EntitySet="categories" />
+            <End Role="custom" EntitySet="custom" />
+          </AssociationSet>
+          <AssociationSet Name="FK_custom_client" Association="Self.FK_custom_client">
+            <End Role="clients" EntitySet="clients" />
+            <End Role="custom" EntitySet="custom" />
+          </AssociationSet>
+          <AssociationSet Name="FK_history_apartments" Association="Self.FK_history_apartments">
+            <End Role="apartments" EntitySet="apartments" />
+            <End Role="history" EntitySet="history" />
+          </AssociationSet>
+          <AssociationSet Name="FK_history_categories" Association="Self.FK_history_categories">
+            <End Role="categories" EntitySet="categories" />
+            <End Role="history" EntitySet="history" />
+          </AssociationSet>
+          <AssociationSet Name="FK_history_client" Association="Self.FK_history_client">
+            <End Role="clients" EntitySet="clients" />
+            <End Role="history" EntitySet="history" />
+          </AssociationSet>
+          <AssociationSet Name="FK_history_tzimers" Association="Self.FK_history_tzimers">
+            <End Role="tzimers" EntitySet="tzimers" />
+            <End Role="history" EntitySet="history" />
+          </AssociationSet>
+          <AssociationSet Name="FK_history_units" Association="Self.FK_history_units">
+            <End Role="units" EntitySet="units" />
+            <End Role="history" EntitySet="history" />
+          </AssociationSet>
+          <AssociationSet Name="FK_orders_apartments" Association="Self.FK_orders_apartments">
+            <End Role="apartments" EntitySet="apartments" />
+            <End Role="orders" EntitySet="orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_orders_categories" Association="Self.FK_orders_categories">
+            <End Role="categories" EntitySet="categories" />
+            <End Role="orders" EntitySet="orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_orders_client" Association="Self.FK_orders_client">
+            <End Role="clients" EntitySet="clients" />
+            <End Role="orders" EntitySet="orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_orders_tzimers" Association="Self.FK_orders_tzimers">
+            <End Role="tzimers" EntitySet="tzimers" />
+            <End Role="orders" EntitySet="orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_orders_units" Association="Self.FK_orders_units">
+            <End Role="units" EntitySet="units" />
+            <End Role="orders" EntitySet="orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tzimers_renter" Association="Self.FK_tzimers_renter">
+            <End Role="renter" EntitySet="renter" />
+            <End Role="tzimers" EntitySet="tzimers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_units_renter" Association="Self.FK_units_renter">
+            <End Role="renter" EntitySet="renter" />
+            <End Role="units" EntitySet="units" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="projectDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="apartments">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_renter" Type="Int32" Nullable="false" />
+          <Property Name="city" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="floor" Type="Int32" Nullable="false" />
+          <Property Name="num_rooms" Type="Int32" Nullable="false" />
+          <Property Name="main_img" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="extra_img1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="extra_img2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="extra_img3" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="extra_img4" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="extra_img5" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="extra_img6" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="extra_img7" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="price" Type="Int32" Nullable="false" />
+          <Property Name="remarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="renter" Relationship="Self.FK_apartments_renter1" FromRole="apartments" ToRole="renter" />
+          <NavigationProperty Name="comments" Relationship="Self.FK_comments_apartments" FromRole="apartments" ToRole="comments" />
+          <NavigationProperty Name="history" Relationship="Self.FK_history_apartments" FromRole="apartments" ToRole="history" />
+          <NavigationProperty Name="orders" Relationship="Self.FK_orders_apartments" FromRole="apartments" ToRole="orders" />
+        </EntityType>
+        <EntityType Name="categories">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="custom" Relationship="Self.FK_custom_categories" FromRole="categories" ToRole="custom" />
+          <NavigationProperty Name="history" Relationship="Self.FK_history_categories" FromRole="categories" ToRole="history" />
+          <NavigationProperty Name="orders" Relationship="Self.FK_orders_categories" FromRole="categories" ToRole="orders" />
+        </EntityType>
+        <EntityType Name="clients">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="comments" Relationship="Self.FK_comments_client" FromRole="clients" ToRole="comments" />
+          <NavigationProperty Name="custom" Relationship="Self.FK_custom_client" FromRole="clients" ToRole="custom" />
+          <NavigationProperty Name="history" Relationship="Self.FK_history_client" FromRole="clients" ToRole="history" />
+          <NavigationProperty Name="orders" Relationship="Self.FK_orders_client" FromRole="clients" ToRole="orders" />
+        </EntityType>
+        <EntityType Name="renter">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="account_num" Type="String" MaxLength="13" FixedLength="true" Unicode="true" />
+          <Property Name="bank_num" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
+          <Property Name="snif_num" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
+          <Property Name="tel" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="apartments" Relationship="Self.FK_apartments_renter1" FromRole="renter" ToRole="apartments" />
+          <NavigationProperty Name="tzimers" Relationship="Self.FK_tzimers_renter" FromRole="renter" ToRole="tzimers" />
+          <NavigationProperty Name="units" Relationship="Self.FK_units_renter" FromRole="renter" ToRole="units" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="tzimers">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_renter" Type="Int32" Nullable="false" />
+          <Property Name="city" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="main_img" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="extra_img1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="extra_img2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="extra_img3" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="extra_img4" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="extra_img5" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="extra_img6" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="extra_img7" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="price" Type="Int32" />
+          <Property Name="remarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="renter" Relationship="Self.FK_tzimers_renter" FromRole="tzimers" ToRole="renter" />
+          <NavigationProperty Name="comments" Relationship="Self.FK_comments_tzimers" FromRole="tzimers" ToRole="comments" />
+          <NavigationProperty Name="history" Relationship="Self.FK_history_tzimers" FromRole="tzimers" ToRole="history" />
+          <NavigationProperty Name="orders" Relationship="Self.FK_orders_tzimers" FromRole="tzimers" ToRole="orders" />
+        </EntityType>
+        <EntityType Name="units">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_renter" Type="Int32" Nullable="false" />
+          <Property Name="city" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="mr" Type="Int32" Nullable="false" />
+          <Property Name="main_img" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="extra_img1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="extra_img2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="extra_img3" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="extra_img4" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="extra_img5" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="extra_img6" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="extra_img7" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="price" Type="Int32" Nullable="false" />
+          <Property Name="remarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="renter" Relationship="Self.FK_units_renter" FromRole="units" ToRole="renter" />
+          <NavigationProperty Name="comments" Relationship="Self.FK_comments_units" FromRole="units" ToRole="comments" />
+          <NavigationProperty Name="history" Relationship="Self.FK_history_units" FromRole="units" ToRole="history" />
+          <NavigationProperty Name="orders" Relationship="Self.FK_orders_units" FromRole="units" ToRole="orders" />
+        </EntityType>
+        <EntityType Name="comments">
+          <Key>
+            <PropertyRef Name="id_client" />
+            <PropertyRef Name="id_item" />
+            <PropertyRef Name="comment" />
+          </Key>
+          <Property Name="id_client" Type="Int32" Nullable="false" />
+          <Property Name="id_item" Type="Int32" Nullable="false" />
+          <Property Name="comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="apartments" Relationship="Self.FK_comments_apartments" FromRole="comments" ToRole="apartments" />
+          <NavigationProperty Name="clients" Relationship="Self.FK_comments_client" FromRole="comments" ToRole="clients" />
+          <NavigationProperty Name="tzimers" Relationship="Self.FK_comments_tzimers" FromRole="comments" ToRole="tzimers" />
+          <NavigationProperty Name="units" Relationship="Self.FK_comments_units" FromRole="comments" ToRole="units" />
+        </EntityType>
+        <EntityType Name="custom">
+          <Key>
+            <PropertyRef Name="id_client" />
+            <PropertyRef Name="id_category" />
+            <PropertyRef Name="city" />
+            <PropertyRef Name="minPrice" />
+            <PropertyRef Name="maxPrice" />
+          </Key>
+          <Property Name="id_client" Type="Int32" Nullable="false" />
+          <Property Name="id_category" Type="Int32" Nullable="false" />
+          <Property Name="city" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="minPrice" Type="Int32" Nullable="false" />
+          <Property Name="maxPrice" Type="Int32" Nullable="false" />
+          <Property Name="num_rooms" Type="Int32" />
+          <Property Name="num_people" Type="Int32" />
+          <Property Name="floor" Type="Int32" />
+          <Property Name="mr" Type="Int32" />
+          <NavigationProperty Name="categories" Relationship="Self.FK_custom_categories" FromRole="custom" ToRole="categories" />
+          <NavigationProperty Name="clients" Relationship="Self.FK_custom_client" FromRole="custom" ToRole="clients" />
+        </EntityType>
+        <EntityType Name="history">
+          <Key>
+            <PropertyRef Name="id_item" />
+            <PropertyRef Name="id_category" />
+            <PropertyRef Name="id_client" />
+            <PropertyRef Name="status" />
+          </Key>
+          <Property Name="id_item" Type="Int32" Nullable="false" />
+          <Property Name="id_category" Type="Int32" Nullable="false" />
+          <Property Name="id_client" Type="Int32" Nullable="false" />
+          <Property Name="status" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="apartments" Relationship="Self.FK_history_apartments" FromRole="history" ToRole="apartments" />
+          <NavigationProperty Name="categories" Relationship="Self.FK_history_categories" FromRole="history" ToRole="categories" />
+          <NavigationProperty Name="clients" Relationship="Self.FK_history_client" FromRole="history" ToRole="clients" />
+          <NavigationProperty Name="tzimers" Relationship="Self.FK_history_tzimers" FromRole="history" ToRole="tzimers" />
+          <NavigationProperty Name="units" Relationship="Self.FK_history_units" FromRole="history" ToRole="units" />
+        </EntityType>
+        <EntityType Name="orders">
+          <Key>
+            <PropertyRef Name="id_item" />
+            <PropertyRef Name="id_category" />
+            <PropertyRef Name="id_client" />
+            <PropertyRef Name="date_receive" />
+            <PropertyRef Name="date_delivery" />
+            <PropertyRef Name="reference" />
+          </Key>
+          <Property Name="id_item" Type="Int32" Nullable="false" />
+          <Property Name="id_category" Type="Int32" Nullable="false" />
+          <Property Name="id_client" Type="Int32" Nullable="false" />
+          <Property Name="date_receive" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="date_delivery" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="reference" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="apartments" Relationship="Self.FK_orders_apartments" FromRole="orders" ToRole="apartments" />
+          <NavigationProperty Name="categories" Relationship="Self.FK_orders_categories" FromRole="orders" ToRole="categories" />
+          <NavigationProperty Name="clients" Relationship="Self.FK_orders_client" FromRole="orders" ToRole="clients" />
+          <NavigationProperty Name="tzimers" Relationship="Self.FK_orders_tzimers" FromRole="orders" ToRole="tzimers" />
+          <NavigationProperty Name="units" Relationship="Self.FK_orders_units" FromRole="orders" ToRole="units" />
+        </EntityType>
+        <Association Name="FK_apartments_renter1">
+          <End Role="renter" Type="Self.renter" Multiplicity="1" />
+          <End Role="apartments" Type="Self.apartments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="renter">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="apartments">
+              <PropertyRef Name="id_renter" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_comments_apartments">
+          <End Role="apartments" Type="Self.apartments" Multiplicity="1" />
+          <End Role="comments" Type="Self.comments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="apartments">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="comments">
+              <PropertyRef Name="id_item" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_history_apartments">
+          <End Role="apartments" Type="Self.apartments" Multiplicity="1" />
+          <End Role="history" Type="Self.history" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="apartments">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="history">
+              <PropertyRef Name="id_item" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_orders_apartments">
+          <End Role="apartments" Type="Self.apartments" Multiplicity="1" />
+          <End Role="orders" Type="Self.orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="apartments">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="orders">
+              <PropertyRef Name="id_item" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_custom_categories">
+          <End Role="categories" Type="Self.categories" Multiplicity="1" />
+          <End Role="custom" Type="Self.custom" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="categories">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="custom">
+              <PropertyRef Name="id_category" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_history_categories">
+          <End Role="categories" Type="Self.categories" Multiplicity="1" />
+          <End Role="history" Type="Self.history" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="categories">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="history">
+              <PropertyRef Name="id_category" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_orders_categories">
+          <End Role="categories" Type="Self.categories" Multiplicity="1" />
+          <End Role="orders" Type="Self.orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="categories">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="orders">
+              <PropertyRef Name="id_category" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_comments_client">
+          <End Role="clients" Type="Self.clients" Multiplicity="1" />
+          <End Role="comments" Type="Self.comments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="clients">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="comments">
+              <PropertyRef Name="id_client" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_custom_client">
+          <End Role="clients" Type="Self.clients" Multiplicity="1" />
+          <End Role="custom" Type="Self.custom" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="clients">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="custom">
+              <PropertyRef Name="id_client" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_history_client">
+          <End Role="clients" Type="Self.clients" Multiplicity="1" />
+          <End Role="history" Type="Self.history" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="clients">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="history">
+              <PropertyRef Name="id_client" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_orders_client">
+          <End Role="clients" Type="Self.clients" Multiplicity="1" />
+          <End Role="orders" Type="Self.orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="clients">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="orders">
+              <PropertyRef Name="id_client" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tzimers_renter">
+          <End Role="renter" Type="Self.renter" Multiplicity="1" />
+          <End Role="tzimers" Type="Self.tzimers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="renter">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tzimers">
+              <PropertyRef Name="id_renter" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_units_renter">
+          <End Role="renter" Type="Self.renter" Multiplicity="1" />
+          <End Role="units" Type="Self.units" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="renter">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="units">
+              <PropertyRef Name="id_renter" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_comments_tzimers">
+          <End Role="tzimers" Type="Self.tzimers" Multiplicity="1" />
+          <End Role="comments" Type="Self.comments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tzimers">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="comments">
+              <PropertyRef Name="id_item" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_history_tzimers">
+          <End Role="tzimers" Type="Self.tzimers" Multiplicity="1" />
+          <End Role="history" Type="Self.history" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tzimers">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="history">
+              <PropertyRef Name="id_item" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_orders_tzimers">
+          <End Role="tzimers" Type="Self.tzimers" Multiplicity="1" />
+          <End Role="orders" Type="Self.orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tzimers">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="orders">
+              <PropertyRef Name="id_item" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_comments_units">
+          <End Role="units" Type="Self.units" Multiplicity="1" />
+          <End Role="comments" Type="Self.comments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="units">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="comments">
+              <PropertyRef Name="id_item" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_history_units">
+          <End Role="units" Type="Self.units" Multiplicity="1" />
+          <End Role="history" Type="Self.history" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="units">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="history">
+              <PropertyRef Name="id_item" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_orders_units">
+          <End Role="units" Type="Self.units" Multiplicity="1" />
+          <End Role="orders" Type="Self.orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="units">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="orders">
+              <PropertyRef Name="id_item" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="projectDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="apartments" EntityType="Self.apartments" />
+          <EntitySet Name="categories" EntityType="Self.categories" />
+          <EntitySet Name="clients" EntityType="Self.clients" />
+          <EntitySet Name="renter" EntityType="Self.renter" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="tzimers" EntityType="Self.tzimers" />
+          <EntitySet Name="units" EntityType="Self.units" />
+          <EntitySet Name="comments" EntityType="Self.comments" />
+          <EntitySet Name="custom" EntityType="Self.custom" />
+          <EntitySet Name="history" EntityType="Self.history" />
+          <EntitySet Name="orders" EntityType="Self.orders" />
+          <AssociationSet Name="FK_apartments_renter1" Association="Self.FK_apartments_renter1">
+            <End Role="renter" EntitySet="renter" />
+            <End Role="apartments" EntitySet="apartments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_comments_apartments" Association="Self.FK_comments_apartments">
+            <End Role="apartments" EntitySet="apartments" />
+            <End Role="comments" EntitySet="comments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_history_apartments" Association="Self.FK_history_apartments">
+            <End Role="apartments" EntitySet="apartments" />
+            <End Role="history" EntitySet="history" />
+          </AssociationSet>
+          <AssociationSet Name="FK_orders_apartments" Association="Self.FK_orders_apartments">
+            <End Role="apartments" EntitySet="apartments" />
+            <End Role="orders" EntitySet="orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_custom_categories" Association="Self.FK_custom_categories">
+            <End Role="categories" EntitySet="categories" />
+            <End Role="custom" EntitySet="custom" />
+          </AssociationSet>
+          <AssociationSet Name="FK_history_categories" Association="Self.FK_history_categories">
+            <End Role="categories" EntitySet="categories" />
+            <End Role="history" EntitySet="history" />
+          </AssociationSet>
+          <AssociationSet Name="FK_orders_categories" Association="Self.FK_orders_categories">
+            <End Role="categories" EntitySet="categories" />
+            <End Role="orders" EntitySet="orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_comments_client" Association="Self.FK_comments_client">
+            <End Role="clients" EntitySet="clients" />
+            <End Role="comments" EntitySet="comments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_custom_client" Association="Self.FK_custom_client">
+            <End Role="clients" EntitySet="clients" />
+            <End Role="custom" EntitySet="custom" />
+          </AssociationSet>
+          <AssociationSet Name="FK_history_client" Association="Self.FK_history_client">
+            <End Role="clients" EntitySet="clients" />
+            <End Role="history" EntitySet="history" />
+          </AssociationSet>
+          <AssociationSet Name="FK_orders_client" Association="Self.FK_orders_client">
+            <End Role="clients" EntitySet="clients" />
+            <End Role="orders" EntitySet="orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tzimers_renter" Association="Self.FK_tzimers_renter">
+            <End Role="renter" EntitySet="renter" />
+            <End Role="tzimers" EntitySet="tzimers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_units_renter" Association="Self.FK_units_renter">
+            <End Role="renter" EntitySet="renter" />
+            <End Role="units" EntitySet="units" />
+          </AssociationSet>
+          <AssociationSet Name="FK_comments_tzimers" Association="Self.FK_comments_tzimers">
+            <End Role="tzimers" EntitySet="tzimers" />
+            <End Role="comments" EntitySet="comments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_history_tzimers" Association="Self.FK_history_tzimers">
+            <End Role="tzimers" EntitySet="tzimers" />
+            <End Role="history" EntitySet="history" />
+          </AssociationSet>
+          <AssociationSet Name="FK_orders_tzimers" Association="Self.FK_orders_tzimers">
+            <End Role="tzimers" EntitySet="tzimers" />
+            <End Role="orders" EntitySet="orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_comments_units" Association="Self.FK_comments_units">
+            <End Role="units" EntitySet="units" />
+            <End Role="comments" EntitySet="comments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_history_units" Association="Self.FK_history_units">
+            <End Role="units" EntitySet="units" />
+            <End Role="history" EntitySet="history" />
+          </AssociationSet>
+          <AssociationSet Name="FK_orders_units" Association="Self.FK_orders_units">
+            <End Role="units" EntitySet="units" />
+            <End Role="orders" EntitySet="orders" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="projectDBModelStoreContainer" CdmEntityContainer="projectDBEntities">
+          <EntitySetMapping Name="apartments">
+            <EntityTypeMapping TypeName="projectDBModel.apartments">
+              <MappingFragment StoreEntitySet="apartments">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="id_renter" ColumnName="id_renter" />
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="floor" ColumnName="floor" />
+                <ScalarProperty Name="num_rooms" ColumnName="num_rooms" />
+                <ScalarProperty Name="main_img" ColumnName="main_img" />
+                <ScalarProperty Name="extra_img1" ColumnName="extra_img1" />
+                <ScalarProperty Name="extra_img2" ColumnName="extra_img2" />
+                <ScalarProperty Name="extra_img3" ColumnName="extra_img3" />
+                <ScalarProperty Name="extra_img4" ColumnName="extra_img4" />
+                <ScalarProperty Name="extra_img5" ColumnName="extra_img5" />
+                <ScalarProperty Name="extra_img6" ColumnName="extra_img6" />
+                <ScalarProperty Name="extra_img7" ColumnName="extra_img7" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="remarks" ColumnName="remarks" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="categories">
+            <EntityTypeMapping TypeName="projectDBModel.categories">
+              <MappingFragment StoreEntitySet="categories">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="clients">
+            <EntityTypeMapping TypeName="projectDBModel.clients">
+              <MappingFragment StoreEntitySet="clients">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="email" ColumnName="email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="renter">
+            <EntityTypeMapping TypeName="projectDBModel.renter">
+              <MappingFragment StoreEntitySet="renter">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="account_num" ColumnName="account_num" />
+                <ScalarProperty Name="bank_num" ColumnName="bank_num" />
+                <ScalarProperty Name="snif_num" ColumnName="snif_num" />
+                <ScalarProperty Name="tel" ColumnName="tel" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="projectDBModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tzimers">
+            <EntityTypeMapping TypeName="projectDBModel.tzimers">
+              <MappingFragment StoreEntitySet="tzimers">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="id_renter" ColumnName="id_renter" />
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="main_img" ColumnName="main_img" />
+                <ScalarProperty Name="extra_img1" ColumnName="extra_img1" />
+                <ScalarProperty Name="extra_img2" ColumnName="extra_img2" />
+                <ScalarProperty Name="extra_img3" ColumnName="extra_img3" />
+                <ScalarProperty Name="extra_img4" ColumnName="extra_img4" />
+                <ScalarProperty Name="extra_img5" ColumnName="extra_img5" />
+                <ScalarProperty Name="extra_img6" ColumnName="extra_img6" />
+                <ScalarProperty Name="extra_img7" ColumnName="extra_img7" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="remarks" ColumnName="remarks" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="units">
+            <EntityTypeMapping TypeName="projectDBModel.units">
+              <MappingFragment StoreEntitySet="units">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="id_renter" ColumnName="id_renter" />
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="mr" ColumnName="mr" />
+                <ScalarProperty Name="main_img" ColumnName="main_img" />
+                <ScalarProperty Name="extra_img1" ColumnName="extra_img1" />
+                <ScalarProperty Name="extra_img2" ColumnName="extra_img2" />
+                <ScalarProperty Name="extra_img3" ColumnName="extra_img3" />
+                <ScalarProperty Name="extra_img4" ColumnName="extra_img4" />
+                <ScalarProperty Name="extra_img5" ColumnName="extra_img5" />
+                <ScalarProperty Name="extra_img6" ColumnName="extra_img6" />
+                <ScalarProperty Name="extra_img7" ColumnName="extra_img7" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="remarks" ColumnName="remarks" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="comments">
+            <EntityTypeMapping TypeName="projectDBModel.comments">
+              <MappingFragment StoreEntitySet="comments">
+                <ScalarProperty Name="id_client" ColumnName="id_client" />
+                <ScalarProperty Name="id_item" ColumnName="id_item" />
+                <ScalarProperty Name="comment" ColumnName="comment" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="custom">
+            <EntityTypeMapping TypeName="projectDBModel.custom">
+              <MappingFragment StoreEntitySet="custom">
+                <ScalarProperty Name="id_client" ColumnName="id_client" />
+                <ScalarProperty Name="id_category" ColumnName="id_category" />
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="minPrice" ColumnName="minPrice" />
+                <ScalarProperty Name="maxPrice" ColumnName="maxPrice" />
+                <ScalarProperty Name="num_rooms" ColumnName="num_rooms" />
+                <ScalarProperty Name="num_people" ColumnName="num_people" />
+                <ScalarProperty Name="floor" ColumnName="floor" />
+                <ScalarProperty Name="mr" ColumnName="mr" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="history">
+            <EntityTypeMapping TypeName="projectDBModel.history">
+              <MappingFragment StoreEntitySet="history">
+                <ScalarProperty Name="id_item" ColumnName="id_item" />
+                <ScalarProperty Name="id_category" ColumnName="id_category" />
+                <ScalarProperty Name="id_client" ColumnName="id_client" />
+                <ScalarProperty Name="status" ColumnName="status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="orders">
+            <EntityTypeMapping TypeName="projectDBModel.orders">
+              <MappingFragment StoreEntitySet="orders">
+                <ScalarProperty Name="id_item" ColumnName="id_item" />
+                <ScalarProperty Name="id_category" ColumnName="id_category" />
+                <ScalarProperty Name="id_client" ColumnName="id_client" />
+                <ScalarProperty Name="date_receive" ColumnName="date_receive" />
+                <ScalarProperty Name="date_delivery" ColumnName="date_delivery" />
+                <ScalarProperty Name="reference" ColumnName="reference" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

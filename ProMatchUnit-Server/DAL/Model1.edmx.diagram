@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="d90bc38f3f494c1593d7cfb8fdc38e4c" Name="Diagram1">
+        <EntityTypeShape EntityType="projectDBModel.apartments" Width="1.5" PointX="0.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="projectDBModel.categories" Width="1.5" PointX="0.5" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="projectDBModel.clients" Width="1.5" PointX="0.5" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="projectDBModel.renter" Width="1.5" PointX="1.5" PointY="16.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="projectDBModel.sysdiagrams" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="projectDBModel.tzimers" Width="1.5" PointX="0.75" PointY="21.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="projectDBModel.units" Width="1.5" PointX="0.75" PointY="26.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="projectDBModel.comments" Width="1.5" PointX="3" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="projectDBModel.custom" Width="1.5" PointX="6" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="projectDBModel.history" Width="1.5" PointX="5" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="projectDBModel.orders" Width="1.5" PointX="3" PointY="10.75" IsExpanded="true" />
+        <AssociationConnector Association="projectDBModel.FK_apartments_renter1" ManuallyRouted="false" />
+        <AssociationConnector Association="projectDBModel.FK_comments_apartments" ManuallyRouted="false" />
+        <AssociationConnector Association="projectDBModel.FK_history_apartments" ManuallyRouted="false" />
+        <AssociationConnector Association="projectDBModel.FK_orders_apartments" ManuallyRouted="false" />
+        <AssociationConnector Association="projectDBModel.FK_custom_categories" ManuallyRouted="false" />
+        <AssociationConnector Association="projectDBModel.FK_history_categories" ManuallyRouted="false" />
+        <AssociationConnector Association="projectDBModel.FK_orders_categories" ManuallyRouted="false" />
+        <AssociationConnector Association="projectDBModel.FK_comments_client" ManuallyRouted="false" />
+        <AssociationConnector Association="projectDBModel.FK_custom_client" ManuallyRouted="false" />
+        <AssociationConnector Association="projectDBModel.FK_history_client" ManuallyRouted="false" />
+        <AssociationConnector Association="projectDBModel.FK_orders_client" ManuallyRouted="false" />
+        <AssociationConnector Association="projectDBModel.FK_tzimers_renter" ManuallyRouted="false" />
+        <AssociationConnector Association="projectDBModel.FK_units_renter" ManuallyRouted="false" />
+        <AssociationConnector Association="projectDBModel.FK_comments_tzimers" ManuallyRouted="false" />
+        <AssociationConnector Association="projectDBModel.FK_history_tzimers" ManuallyRouted="false" />
+        <AssociationConnector Association="projectDBModel.FK_orders_tzimers" ManuallyRouted="false" />
+        <AssociationConnector Association="projectDBModel.FK_comments_units" ManuallyRouted="false" />
+        <AssociationConnector Association="projectDBModel.FK_history_units" ManuallyRouted="false" />
+        <AssociationConnector Association="projectDBModel.FK_orders_units" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

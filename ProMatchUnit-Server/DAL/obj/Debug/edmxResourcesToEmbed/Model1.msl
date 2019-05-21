@@ -1,0 +1,157 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="projectDBModelStoreContainer" CdmEntityContainer="projectDBEntities">
+    <EntitySetMapping Name="apartments">
+      <EntityTypeMapping TypeName="projectDBModel.apartments">
+        <MappingFragment StoreEntitySet="apartments">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="id_renter" ColumnName="id_renter" />
+          <ScalarProperty Name="city" ColumnName="city" />
+          <ScalarProperty Name="address" ColumnName="address" />
+          <ScalarProperty Name="floor" ColumnName="floor" />
+          <ScalarProperty Name="num_rooms" ColumnName="num_rooms" />
+          <ScalarProperty Name="main_img" ColumnName="main_img" />
+          <ScalarProperty Name="extra_img1" ColumnName="extra_img1" />
+          <ScalarProperty Name="extra_img2" ColumnName="extra_img2" />
+          <ScalarProperty Name="extra_img3" ColumnName="extra_img3" />
+          <ScalarProperty Name="extra_img4" ColumnName="extra_img4" />
+          <ScalarProperty Name="extra_img5" ColumnName="extra_img5" />
+          <ScalarProperty Name="extra_img6" ColumnName="extra_img6" />
+          <ScalarProperty Name="extra_img7" ColumnName="extra_img7" />
+          <ScalarProperty Name="price" ColumnName="price" />
+          <ScalarProperty Name="remarks" ColumnName="remarks" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="categories">
+      <EntityTypeMapping TypeName="projectDBModel.categories">
+        <MappingFragment StoreEntitySet="categories">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="clients">
+      <EntityTypeMapping TypeName="projectDBModel.clients">
+        <MappingFragment StoreEntitySet="clients">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="email" ColumnName="email" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="renter">
+      <EntityTypeMapping TypeName="projectDBModel.renter">
+        <MappingFragment StoreEntitySet="renter">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="account_num" ColumnName="account_num" />
+          <ScalarProperty Name="bank_num" ColumnName="bank_num" />
+          <ScalarProperty Name="snif_num" ColumnName="snif_num" />
+          <ScalarProperty Name="tel" ColumnName="tel" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="projectDBModel.sysdiagrams">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tzimers">
+      <EntityTypeMapping TypeName="projectDBModel.tzimers">
+        <MappingFragment StoreEntitySet="tzimers">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="id_renter" ColumnName="id_renter" />
+          <ScalarProperty Name="city" ColumnName="city" />
+          <ScalarProperty Name="address" ColumnName="address" />
+          <ScalarProperty Name="main_img" ColumnName="main_img" />
+          <ScalarProperty Name="extra_img1" ColumnName="extra_img1" />
+          <ScalarProperty Name="extra_img2" ColumnName="extra_img2" />
+          <ScalarProperty Name="extra_img3" ColumnName="extra_img3" />
+          <ScalarProperty Name="extra_img4" ColumnName="extra_img4" />
+          <ScalarProperty Name="extra_img5" ColumnName="extra_img5" />
+          <ScalarProperty Name="extra_img6" ColumnName="extra_img6" />
+          <ScalarProperty Name="extra_img7" ColumnName="extra_img7" />
+          <ScalarProperty Name="price" ColumnName="price" />
+          <ScalarProperty Name="remarks" ColumnName="remarks" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="units">
+      <EntityTypeMapping TypeName="projectDBModel.units">
+        <MappingFragment StoreEntitySet="units">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="id_renter" ColumnName="id_renter" />
+          <ScalarProperty Name="city" ColumnName="city" />
+          <ScalarProperty Name="address" ColumnName="address" />
+          <ScalarProperty Name="mr" ColumnName="mr" />
+          <ScalarProperty Name="main_img" ColumnName="main_img" />
+          <ScalarProperty Name="extra_img1" ColumnName="extra_img1" />
+          <ScalarProperty Name="extra_img2" ColumnName="extra_img2" />
+          <ScalarProperty Name="extra_img3" ColumnName="extra_img3" />
+          <ScalarProperty Name="extra_img4" ColumnName="extra_img4" />
+          <ScalarProperty Name="extra_img5" ColumnName="extra_img5" />
+          <ScalarProperty Name="extra_img6" ColumnName="extra_img6" />
+          <ScalarProperty Name="extra_img7" ColumnName="extra_img7" />
+          <ScalarProperty Name="price" ColumnName="price" />
+          <ScalarProperty Name="remarks" ColumnName="remarks" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="comments">
+      <EntityTypeMapping TypeName="projectDBModel.comments">
+        <MappingFragment StoreEntitySet="comments">
+          <ScalarProperty Name="id_client" ColumnName="id_client" />
+          <ScalarProperty Name="id_item" ColumnName="id_item" />
+          <ScalarProperty Name="comment" ColumnName="comment" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="custom">
+      <EntityTypeMapping TypeName="projectDBModel.custom">
+        <MappingFragment StoreEntitySet="custom">
+          <ScalarProperty Name="id_client" ColumnName="id_client" />
+          <ScalarProperty Name="id_category" ColumnName="id_category" />
+          <ScalarProperty Name="city" ColumnName="city" />
+          <ScalarProperty Name="minPrice" ColumnName="minPrice" />
+          <ScalarProperty Name="maxPrice" ColumnName="maxPrice" />
+          <ScalarProperty Name="num_rooms" ColumnName="num_rooms" />
+          <ScalarProperty Name="num_people" ColumnName="num_people" />
+          <ScalarProperty Name="floor" ColumnName="floor" />
+          <ScalarProperty Name="mr" ColumnName="mr" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="history">
+      <EntityTypeMapping TypeName="projectDBModel.history">
+        <MappingFragment StoreEntitySet="history">
+          <ScalarProperty Name="id_item" ColumnName="id_item" />
+          <ScalarProperty Name="id_category" ColumnName="id_category" />
+          <ScalarProperty Name="id_client" ColumnName="id_client" />
+          <ScalarProperty Name="status" ColumnName="status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="orders">
+      <EntityTypeMapping TypeName="projectDBModel.orders">
+        <MappingFragment StoreEntitySet="orders">
+          <ScalarProperty Name="id_item" ColumnName="id_item" />
+          <ScalarProperty Name="id_category" ColumnName="id_category" />
+          <ScalarProperty Name="id_client" ColumnName="id_client" />
+          <ScalarProperty Name="date_receive" ColumnName="date_receive" />
+          <ScalarProperty Name="date_delivery" ColumnName="date_delivery" />
+          <ScalarProperty Name="reference" ColumnName="reference" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
