@@ -7,6 +7,7 @@ import { HomeComponent } from './components/home/home.component';
 import { ApartmentsComponent } from './components/apartments/apartments.component';
 import { UnitsComponent } from './components/units/units.component';
 import { TzimersComponent } from './components/tzimers/tzimers.component';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { TzimersComponent } from './components/tzimers/tzimers.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   exports:[AppRoutingModule],
   providers: [],

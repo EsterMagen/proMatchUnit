@@ -19,8 +19,9 @@ namespace API_Project.Controllers
         // GET: api/apartments
         public IQueryable<apartments> Get()
         {
+            int x = 9;
             return db.apartments;
-
+           
         }
 
         // GET: api/apartments/5
